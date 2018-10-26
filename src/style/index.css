@@ -1,0 +1,380 @@
+@font-face { 
+    font-family: 'Karla';
+    src: url('../assets/fonts/karla/Karla-Bold.ttf') format('ttf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+i {
+    font-style: inherit;
+}
+
+input:focus { 
+    outline: none;
+}
+
+html, body {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    touch-action: none;
+}
+
+a, a:visited, a:hover, a:active {
+    color: inherit;
+}
+
+#card {
+    position: relative;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    width: 100%;
+    height: 100%;
+}
+
+.card-face {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    border-radius: 4px;
+    background-color: white;
+    /* backface-visibility: hidden; */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/*
+* Issue: Can't use CSS proprty backface-visibility, all text is displayed once the rotation's animation is done
+* Solution: hide non active card's face using the CSS class hidden
+*/
+.hidden {
+    visibility: hidden;
+    transition: visibility 0ms linear 250ms;
+}
+
+.shown {
+    visibility: visible;
+    transition: visibility 0ms linear 250ms;
+}
+
+#card-back {
+    transform: rotateY( 180deg );
+}
+
+#card-back > .card-row {
+    flex-grow: 1;
+}
+
+#card-back > #search-row {
+    flex-grow: 2;
+}
+
+#scene {
+    perspective: 600px;
+    animation: bounce 1s;
+    transform-style: preserve-3d;
+    transition-duration: 0.25s;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#card.is-flipped {
+    transform: rotateY(180deg);
+}
+
+#language-picker {
+	background-color: #FFF;
+	display: inline-block;
+	padding: 0;
+	overflow: hidden;
+	transition: all .3s ease;
+	vertical-align: top;
+    position: absolute;
+    left: 2rem;
+    height: 20px;
+}
+
+#language-picker.hover {
+	/* don't forget the 1px border */
+	height: 60px;
+}
+
+#language-picker > li {
+	display: block;
+	padding: 0px 5px;
+	border-top: 1px solid #EEE;
+}
+
+#language-picker > li:hover{
+	background-color: #EEE;
+}
+
+#language-picker > li:first-child {
+	border: none;
+	background: #FFF !important;
+}
+
+.text {
+    display: flex;
+    align-items: center;
+    font-family: 'Karla', sans-serif;
+    text-align: center;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.text > * {
+    padding: 0 0 4px 4px;
+    font-size: inherit;
+    vertical-align: middle;
+    line-height: 1;
+}
+
+.icon-rounded {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+
+.icon > img {
+    width: 19px;
+    height: 19px;
+}
+
+.icon-me, .icon-me > img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+@media (max-width: 480px) {
+    #scene {
+        width: 80vw;
+        height: 400px;
+    }
+
+    #card {
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+
+    #card:hover {
+        box-shadow: 0 28px 56px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+}
+
+@media (min-width: 481px){
+    #scene {
+        width: 400px;
+        height: 250px;
+    }
+
+    #card {
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+    
+}
+
+@keyframes bounce {
+    0% {
+        transform: scale(0);
+        opacity: 0
+    }
+
+    50% {
+        transform: scale(1.0);
+        opacity: 1.0;
+    }
+
+    75% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1.0);
+    }
+}
+
+#me {
+    width: 40px;
+    height: 40px;
+}
+
+.card-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.col {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#search-box {
+    width: 100%;
+    height: calc(100% - 4px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+#search-row {
+    height: 50%;
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+a:-webkit-any-link {
+    text-decoration: none;
+}
+
+.search-input-container {
+    margin-top: 6px;
+    padding: 0 6px;
+    position: relative;
+    height: 20%;
+}
+
+#search-input {
+    font-size: 16px;
+    display: block;
+    width: 100%;
+    padding: 5px 25px 6px 10px;
+    border-radius: 5px;
+    border: 1px solid #d9d9d9;
+    outline: 0;
+}
+
+#search-items {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    max-height: 80%;
+}
+
+#search-items > * {
+    display: flex;
+    align-items: start;
+    margin: 10px;
+}
+/**
+ * Tooltip Styles
+ */
+
+/* Base styles for the element that has a tooltip */
+[data-tooltip],
+.tooltip {
+  position: relative;
+  cursor: pointer;
+}
+
+/* Base styles for the entire tooltip */
+[data-tooltip]:before,
+[data-tooltip]:after{
+  position: absolute;
+  visibility: hidden;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  -webkit-transition: 
+      opacity 0.2s ease-in-out,
+    visibility 0.2s ease-in-out,
+    -webkit-transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+    -moz-transition:    
+        opacity 0.2s ease-in-out,
+        visibility 0.2s ease-in-out,
+        -moz-transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+    transition:         
+        opacity 0.2s ease-in-out,
+        visibility 0.2s ease-in-out,
+        transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform:    translate3d(0, 0, 0);
+  transform:         translate3d(0, 0, 0);
+  pointer-events: none;
+}
+
+/* Show the entire tooltip on hover and focus */
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after,
+[data-tooltip]:focus:before,
+[data-tooltip]:focus:after{
+  visibility: visible;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
+}
+
+/* Base styles for the tooltip's directional arrow */
+
+[data-tooltip]:before {
+  z-index: 1001;
+  border: 6px solid transparent;
+  background: transparent;
+  content: "";
+}
+
+/* Base styles for the tooltip's content area */
+
+[data-tooltip]:after {
+  z-index: 1000;
+  padding: 8px;
+  width: 120px;
+  background-color: #000;
+  background-color: hsla(0, 0%, 20%, 0.9);
+  color: #fff;
+  content: attr(data-tooltip);
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+[data-tooltip]:before,
+[data-tooltip]:after{
+    bottom: 100%;
+    left: 50%;
+}
+
+[data-tooltip]:before {
+    margin-left: -6px;
+    margin-bottom: -12px;
+    border-top-color: #000;
+    border-top-color: hsla(0, 0%, 20%, 0.9);
+}
+
+[data-tooltip]:after {
+  margin-left: -80px;
+}
+
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after,
+[data-tooltip]:focus:before,
+[data-tooltip]:focus:after {
+  -webkit-transform: translateY(-12px);
+  -moz-transform:    translateY(-12px);
+  transform:         translateY(-12px); 
+}

@@ -1,0 +1,1 @@
+export const colors: string[] = ['darkslategrey', 'tomato', 'tan', 'steelblue', 'steal'];
