@@ -1,5 +1,8 @@
 export const translations = {
     'fr': {
+        nativescript: 'Développeur Expert 😎',
+        angular: 'Depuis 2014 🤟',
+        typescript: 'Depuis Angular 2.x',
         catchPhrase: {
             0: 'Catch phrase 0',
             2: 'Catch phrase 2',
@@ -8,10 +11,30 @@ export const translations = {
         surfing: 'du surf 🤙',
         teaching: 'apprendre aux autres',
         collaborate: 'travailler en équipe',
-        inLoveWithOpenSource: 'Je suis ❤️ de l\'open source et...',
-        wannaKnowMore: 'Vous voulez en savoir plus?'
+        music: 'écouter de la musique',
+        inLoveWithOpenSource: `Je suis ❤️ de l'open source et...`,
+        wannaKnowMore: 'Vous voulez en savoir plus?',
+        liftingWeights: 'Soulever des poids (essayer en tout cas) 💪',
+        cat: `les chats (même si ça n'a pas l'air réciproque 🙄)`,
+        dog: `les chiens (en plus ça a l'air réciproque 😂)`,
+        pingpong: `j'ai même fait de la compétition`,
+        tennis: `j'ai du arrêté à cause du pingpong`,
+        guitar: `j'en ai joué pendant 4 ans (ne me demandez pas d'en jouer..)`,
+        piano: `j'ai joué du piano pendant 9 ans (ne se souvient de rien..)`,
+        videoGames: `Je joue à Fortnie, ne me détestez pas`,
+        github: `j'adore git et l'open source, comment pourrais-je ne pas aimer GitHub?`,
+        git: `collaborer sur do code rendu simple`,
+        javascript: 'depuis 2014 ️️️️️️️️🤟',
+        sneakersAddict: `j'achète trop de sneakers et mon portefeuille m'en veut`,
+        havingABeer: `partager une bonne bière (ou plusieurs) entre amis 🍻`,
+        thinking: `réfléchir et trouver des solutions 🤔`,
+        wineAndCheese: `Je suis français ne l'oublions pas.. 🧀🍷🍇`,
+        cinema: `J'ai toujours été un cinéphile`
     },
     'en': {
+        nativescript: 'Developer Expert 😎',
+        angular: 'Since 2014 🤟',
+        typescript: 'Since Angular 2.x',
         catchPhrase: {
             0: 'Catch phrase 0',
             2: 'Catch phrase 2',
@@ -20,8 +43,25 @@ export const translations = {
         surfing: 'surfing 🤙',
         teaching: 'teaching',
         collaborate: 'working with others',
-        inLoveWithOpenSource: 'I\'m in ❤️ love with open source and...',
-        wannaKnowMore: 'Wanna know more?'
+        music: 'listening to music',
+        inLoveWithOpenSource: `I'm in ❤️ love with open source and...`,
+        wannaKnowMore: 'Wanna know more?',
+        liftingWeights: 'Lifting weights (trying at least) 💪',
+        cat: `cats (even though they seem to not care 🙄)`,
+        dog: `dogs (they actually seem to care.. 😂)`,
+        pingpong: `I even did competitions`,
+        tennis: `has to stop because of pingpong`,
+        guitar: `I've practiced for 4 years (don't event ask me to play..)`,
+        piano: `I've practiced for 9 years (don't remember a thing..)`,
+        videoGames: `I do play fortnite, don't hate me`,
+        github: `loving git and open source, how could I not love GitHub?`,
+        git: `code collaboration made easy`,
+        javascript: 'since 2014 ️️️️️️️️🤟',
+        sneakersAddict: `I buy too much sneakers, and my wallet doesn't thank me`,
+        havingABeer: `share a good beer (or multiple) with friends 🍻`,
+        thinking: `thinkins and finding solutions 🤔`,
+        wineAndCheese: `Let's not forget I'm french 🧀🍷🍇`,
+        cinema: `I've always been a cinema lover`
     }
 }
 

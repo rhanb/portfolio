@@ -5,12 +5,13 @@
     <meta charset="utf-8">
     <title>rhanb</title>
     <link rel="stylesheet" href="./style/index.css">
-    <link rel="stylesheet" href="./assets/fontello/css/fontello-embedded.css">
+    <link rel="stylesheet" href="./style/tippy.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="manifest" href="/manifest.json" />
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#39c3e3">
+    <meta name="Description" content="Author: Jean-Baptiste Aniel, About: Software Engineer, Category: Portfolio">
     <meta name="msapplication-TileColor" content="#39c3e3">
     <meta name="theme-color" content="#2d89ef">
     <meta name="msapplication-tap-highlight" content="no" />
@@ -19,15 +20,24 @@
 
 <body class="colorised">
 
+    <canvas id="gradient-canvas-body"></canvas>
     <div id="scene">
         <div id="card">
             <div class="card-face shown" id="card-front">
                 <div class="card-row">
-                    <ul id="language-picker">
-                        <li class="language" data-language="en">🇬🇧</li>
-                        <li class="language" data-language="fr">🇫🇷</li>
-                    </ul>
-                    <span id="me" class="icon-me colorised"><img src="./assets/icons/me.svg" alt="JB" /></span>
+                    <div id="language-picker-container">
+                        <ul id="language-picker">
+                            <li class="language" data-language="en">🇬🇧</li>
+                            <li class="language" data-language="fr">🇫🇷</li>
+                        </ul>
+                        <span>
+                            <img src="./assets/icons/down-arrow.png" alt="Github" />
+                        </span>
+                    </div>
+                    <div id="me">
+                        <canvas id="gradient-canvas-me"></canvas>
+                        <img src="./assets/icons/me.svg" alt="JB" />
+                    </div>
                 </div>
                 <div class="card-row text">
                     <h3>Jean-Baptiste Aniel</h3>
@@ -36,23 +46,22 @@
                     <p id="catchPhrase">A catch phrase here</p>
                 </div>
                 <div class="card-row">
-                    <a href="https://github.com/rhanb" target="_blank">
+                    <a href="https://github.com/rhanb" target="_blank" rel="noreferrer">
                         <span class="icon">
                             <img src="./assets/icons/github.png" alt="Github" />
                         </span>
                     </a>
-                    <a href="https://www.linkedin.com/in/jean-baptiste-aniel-185abb97"
-                        target="_blank">
+                    <a href="https://www.linkedin.com/in/jean-baptiste-aniel-185abb97" target="_blank" rel="noreferrer">
                         <span class="icon">
                             <img src="./assets/icons/linkedin.png" alt="Linkedin" />
                         </span>
                     </a>
-                    <a href="https://twitter.com/_rhanb" target="_blank">
+                    <a href="https://twitter.com/_rhanb" target="_blank" rel="noreferrer">
                         <span class="icon">
                             <img src="./assets/icons/twitter.png" alt="Twitter" />
                         </span>
                     </a>
-                    <a href="mailto:aniel.jeanbaptiste@gmail.com" target="_blank">
+                    <a href="mailto:aniel.jeanbaptiste@gmail.com" target="_blank" rel="noreferrer">
                         <span class="icon">
                             <img src="./assets/icons/envelope.png" alt="Email" />
                         </span>
@@ -71,61 +80,48 @@
                             <input type="text" placeholder="Search" id="search-input" autofocus="false" />
                         </div>
                         <div id="search-items">
-                            <span data-tooltip="NativeScript" class="icon col"><img src="./assets/icons/nativescript.png"
-                                    alt="NativeScript" /></span>
-                            <span data-tooltip="Angular" class="icon col"><img src="./assets/icons/angular.svg" alt="Angular" /></span>
-                            <span data-tooltip="TypeScript" class="icon col"><img src="./assets/icons/typescript.png"
-                                    alt="TypeScript" /></span>
-                            <i data-tooltip="collaborate" id="collaborate" class="col">🤝</i>
-                            <i data-tooltip="teaching" id="teaching" class="col">🎓</i>
-                            <i data-tooltip="surfing" id="surfing" class="col">🏄‍♂️</i>
-                            <span data-tooltip="NativeScript" class="icon col"><img src="./assets/icons/nativescript.png"
-                                    alt="NativeScript" /></span>
-                            <span data-tooltip="Angular" class="icon col"><img src="./assets/icons/angular.svg" alt="Angular" /></span>
-                            <span data-tooltip="TypeScript" class="icon col"><img src="./assets/icons/typescript.png"
-                                    alt="TypeScript" /></span>
-                            <i data-tooltip="collaborate" id="collaborate" class="col">🤝</i>
-                            <i data-tooltip="teaching" id="teaching" class="col">🎓</i>
-                            <i data-tooltip="surfing" id="surfing" class="col">🏄‍♂️</i>
-                            <span data-tooltip="NativeScript" class="icon col"><img src="./assets/icons/nativescript.png"
-                                    alt="NativeScript" /></span>
-                            <span data-tooltip="Angular" class="icon col"><img src="./assets/icons/angular.svg" alt="Angular" /></span>
-                            <span data-tooltip="TypeScript" class="icon col"><img src="./assets/icons/typescript.png"
-                                    alt="TypeScript" /></span>
-                            <i data-tooltip="collaborate" id="collaborate" class="col">🤝</i>
-                            <i data-tooltip="teaching" id="teaching" class="col">🎓</i>
-                            <i data-tooltip="surfing" id="surfing" class="col">🏄‍♂️</i>
-                            <span data-tooltip="NativeScript" class="icon col"><img src="./assets/icons/nativescript.png"
-                                    alt="NativeScript" /></span>
-                            <span data-tooltip="Angular" class="icon col"><img src="./assets/icons/angular.svg" alt="Angular" /></span>
-                            <span data-tooltip="TypeScript" class="icon col"><img src="./assets/icons/typescript.png"
-                                    alt="TypeScript" /></span>
-                            <i data-tooltip="collaborate" id="collaborate" class="col">🤝</i>
-                            <i data-tooltip="teaching" id="teaching" class="col">🎓</i>
-                            <i data-tooltip="surfing" id="surfing" class="col">🏄‍♂️</i>
-                            <span data-tooltip="NativeScript" class="icon col"><img src="./assets/icons/nativescript.png"
-                                    alt="NativeScript" /></span>
-                            <span data-tooltip="Angular" class="icon col"><img src="./assets/icons/angular.svg" alt="Angular" /></span>
-                            <span data-tooltip="TypeScript" class="icon col"><img src="./assets/icons/typescript.png"
-                                    alt="TypeScript" /></span>
-                            <i data-tooltip="collaborate" id="collaborate" class="col">🤝</i>
-                            <i data-tooltip="teaching" id="teaching" class="col">🎓</i>
-                            <i data-tooltip="surfing" id="surfing" class="col">🏄‍♂️</i>
-                            <span data-tooltip="NativeScript" class="icon col"><img src="./assets/icons/nativescript.png"
-                                    alt="NativeScript" /></span>
-                            <span data-tooltip="Angular" class="icon col"><img src="./assets/icons/angular.svg" alt="Angular" /></span>
-                            <span data-tooltip="TypeScript" class="icon col"><img src="./assets/icons/typescript.png"
-                                    alt="TypeScript" /></span>
-                            <i data-tooltip="collaborate" id="collaborate" class="col">🤝</i>
-                            <i data-tooltip="teaching" id="teaching" class="col">🎓</i>
-                            <i data-tooltip="surfing" id="surfing" class="col">🏄‍♂️</i>
+                            <span class="icon col tippy" id="nativescript">
+                                <img src="./assets/icons/nativescript.png" alt="NativeScript" />
+                            </span>
+                            <span class="icon col tippy" id="angular">
+                                <img src="./assets/icons/angular.svg" alt="Angular" />
+                            </span>
+                            <span class="icon col tippy" id="typescript">
+                                <img src="./assets/icons/typescript.png" alt="TypeScript" />
+                            </span>
+                            <span id="collaborate" class="col tippy">🤝</span>
+                            <span id="teaching" class="col tippy">🎓</span>
+                            <span id="surfing" class="col tippy">🏄‍♂️</span>
+                            <span id="liftingWeights" class="col tippy">🏋️‍♂️</span>
+                            <span id="music" class="col tippy">🎼</span>
+                            <span id="cat" class="col tippy">🐈</span>
+                            <span id="dog" class="col tippy">🐶</span>
+                            <span id="pingpong" class="col tippy">🏓</span>
+                            <span id="tennis" class="col tippy">🎾</span>
+                            <span id="guitar" class="col tippy">🎸</span>
+                            <span id="piano" class="col tippy">🎹</span>
+                            <span id="videoGames" class="col tippy">🎮</span>
+                            <span id="github" class="icon col tippy">
+                                    <img src="./assets/icons/github-octocat.png" alt="Github" />
+                            </span>
+                            <span id="git" class="icon col tippy">
+                                    <img src="./assets/icons/git.png" alt="Git" />
+                            </span>
+                            <span id="javascript" class="icon col tippy">
+                                    <img src="./assets/icons/javascript.png" alt="JavaScript" />
+                            </span>
+                            <span id="sneakersAddict" class="col tippy">👟</span>
+                            <span id="thinking" class="col tippy">💡</span>
+                            <span id="havingABeer" class="col tippy">🍻</span>
+                            <span id="wineAndCheese" class="col tippy">🍷</span>
+                            <span id="cinema" class="col tippy">🎥</span>
                         </div>
                     </div>
                 </div>
                 <div class="card-row">
                     <div class="text">
                         <span id="wannaKnowMore">wanna know more?</span>
-                        <a href="./assets/cv/CV_ANIEL.pdf" download="CV_ANIEL">📝</a>
+                        <a href="./assets/cv/CV_ANIEL.pdf" target="_blank">📝</a>
                     </div>
                 </div>
             </div>
