@@ -1,25 +1,18 @@
 
 // third party imports
-import Polyglot = require('node-polyglot');
 import { Manager } from 'hammerjs';
 import Granim = require('granim');
-import tippy from 'tippy.js';
-import { Props } from 'tippy.js';
 // local imports
-import { translations } from './translations/translations';
 import { getRandomElementFromArray, getElementCoordinate, calcAngleDegrees, preventSelection, getRandomIntFromRange } from './utils';
+import { Tutorial } from './tutorial/tutorial';
+import { TippyElement } from './common';
+import { Translator } from './translator/translator';
 
-const defaultTippyConfig: Props = {
-    arrow: true,
-    arrowType: 'round',
-    animation: 'scale',
-    touch: true
-};
 export class Portfolio {
 
-    private granims: any[];
-
-    private languagesPicker: HTMLElement;
+    private granims: {
+        [key: string]: Granim
+    } = {};
 
     private me: HTMLElement;
     private scene: HTMLElement;
@@ -29,44 +22,21 @@ export class Portfolio {
     private searchInput: HTMLElement;
     private searchableItems: NodeListOf<HTMLElement>;
 
-    private catchPhrase: any;
-    private translationsKeys: string[];
-    private polyglot: any;
-
-    private _locale: string;
-
     private isScrolling = false;
     private isRotating = false;
 
-    private set locale(newLocale: string) {
-        this._locale = newLocale;
-        localStorage.setItem('locale', newLocale);
-        this.polyglot = new Polyglot({
-            locale: this.locale,
-            phrases: translations[this.locale]
-        });
-    }
+    private translator: Translator;
 
-    private get locale(): string {
-        const locale: string = localStorage.getItem('locale') || this._locale || navigator.language || 'en';
-        return locale.split('-').length > 0 ? locale.split('-')[0] : locale;
-    }
+    private tutorial: Tutorial;
 
     constructor() {
-        this._locale = this.locale;
-        this.polyglot = new Polyglot({
-            locale: this.locale,
-            phrases: translations[this.locale]
-        });
-        this.translationsKeys = Object.keys(translations[this.locale]);
-
         this.initElements();
 
-        tippy.setDefaults(defaultTippyConfig);
-        tippy('.tippy');
+        this.translator = new Translator();
+
+        this.tutorial = new Tutorial(this.translator);
 
         this.initGradients();
-        this.render();
     }
 
     onLoad(): void {
@@ -109,31 +79,25 @@ export class Portfolio {
         });
 
         documentManager.on('panend pancancel', () => {
+            this.tutorial.changeTutorialState('pan', true);
             this.rotateCard(0, 0);
         });
 
         sceneManager.on('doubletap', () => {
+            this.tutorial.changeTutorialState('doubleTap', true);
             this.flipCard();
         });
 
         cardManager.on('swipe', () => {
+            this.tutorial.changeTutorialState('swipe', true);
             this.flipCard();
         });
-
-        this.initLanguagePicker();
 
         this.initSearch();
     }
 
-
-    private render(): void {
-        this.renderTranslatedText();
-        this.orderLanguages();
-    }
-
     private initElements() {
         this.scene = document.getElementById('scene');
-        this.languagesPicker = document.getElementById('language-picker');
         this.card = document.getElementById('card');
         this.me = document.getElementById('gradient-canvas-me');
         this.searchInput = document.getElementById('search-input');
@@ -155,38 +119,24 @@ export class Portfolio {
             }
         };
 
-        const meOptions = {
+        this.granims['me'] = new Granim({
             element: this.me,
             ...options
-        };
-        const bodyOptions = {
+        });
+
+        this.granims['body'] = new Granim({
             element: '#gradient-canvas-body',
             ...options
-        };
-        this.granims = [new Granim(bodyOptions), new Granim(meOptions)];
-    }
-
-    private initLanguagePicker() {
-        const languagesOptions = document.getElementsByClassName('language') as HTMLCollectionOf<HTMLElement>;
-
-        for (let index = 0; index < languagesOptions.length; index++) {
-            const languageManager = new Hammer(languagesOptions.item(index));
-            languageManager.on('tap', (tapEvent) => {
-                if (this.languagesPicker.classList.contains('hover')) {
-                    this.locale = tapEvent.target.dataset.language;
-                    this.render();
-                }
-                this.languagesPicker.classList.toggle('hover');
-            });
-        }
+        });
     }
 
     private initSearch() {
         this.searchInput.addEventListener('input', (event: any) => {
-            console.log(event);
-            this.searchableItems.forEach((item: HTMLElement) => {
-                console.log(item.id)
-                const itemValue = item.id.toLowerCase().trim();
+            this.searchableItems.forEach((item: TippyElement) => {
+                let itemValue = item.id.toLowerCase().trim();
+                if (item._tippy.props.content) {
+                    itemValue = `${itemValue}${item._tippy.props.content.toLowerCase().trim()}`;
+                }
                 const typedValue = event.target.value.toLowerCase().trim();
 
                 if (itemValue.indexOf(typedValue) < 0) {
@@ -196,54 +146,6 @@ export class Portfolio {
                 }
             });
         });
-    }
-
-    private renderTranslatedText(): void {
-
-        this.translationsKeys.forEach((translationKey) => {
-            const elementKey: string = translationKey;
-
-            const translation: string | Object = translations[this.locale][translationKey];
-
-            if (translation instanceof Object) {
-                if (!this.catchPhrase) {
-                    this.catchPhrase = {};
-                    const randomIndex = getRandomIntFromRange(0, Object.keys(translation).length - 1);
-                    this.catchPhrase[translationKey] = randomIndex;
-                    translationKey = `${translationKey}.${randomIndex}`;
-                } else {
-                    translationKey = `${translationKey}.${this.catchPhrase[translationKey]}`;
-                }
-            }
-
-            const element: any = document.getElementById(elementKey);
-
-            const translatedText: string = this.polyglot.t(translationKey);
-
-            if (element) {
-                if (element.classList.contains('tippy')) {
-                    element._tippy.setContent(translatedText ? translatedText : element.dataset.tippy);
-                } else {
-                    element.innerText = translatedText;
-                }
-            }
-        });
-    }
-
-    private orderLanguages(): void {
-
-        const languages: HTMLCollectionOf<HTMLElement> = this.languagesPicker.children as HTMLCollectionOf<HTMLElement>;
-
-        let languageIndex = -1, i = 0;
-        while (i < languages.length && languageIndex < 0) {
-            if (languages[i].dataset.language === this.locale) {
-                languageIndex = i;
-            } else {
-                i++;
-            }
-        }
-
-        this.languagesPicker.insertBefore(languages[languageIndex], languages[0]);
     }
 
 
@@ -259,7 +161,7 @@ export class Portfolio {
         this.card.classList.toggle('is-flipped');
         /*
         * Issue: Can't use CSS proprty backface-visibility, all text is displayed once the rotation's animation is done
-        * Solution: hide non active card's face using the CSS class hidden
+        * Solution: hide non-active card's face using the CSS class hidden
         */
         this.faces.forEach(cardFace => {
             cardFace.classList.toggle('hidden');
@@ -268,7 +170,7 @@ export class Portfolio {
 
     }
 
-    private rotateGradient(granimIndex: number, x: number, y: number) {
+    private rotateGradient(granimKey: 'body' | 'me', x: number, y: number) {
         const customDirection = {
             x0: '0px',
             y0: '0px',
@@ -276,8 +178,8 @@ export class Portfolio {
             y1: `${y}px`
         };
 
-        this.granims[granimIndex].customDirection = customDirection;
-        this.granims[granimIndex].changeDirection('custom');
+        this.granims[granimKey].customDirection = customDirection;
+        this.granims[granimKey].changeDirection('custom');
     }
 
     private onDrag(moveEvent): void {
@@ -302,8 +204,8 @@ export class Portfolio {
         const meX: number = x / elementOffset.width * meOffset.width,
             meY: number = y / elementOffset.height * meOffset.height;
 
-        this.rotateGradient(0, x, y);
-        this.rotateGradient(1, meX, meY);
+        this.rotateGradient('body', x, y);
+        this.rotateGradient('me', meX, meY);
         this.rotateCard(angleDegX, angleDegY);
     }
 }

@@ -1,0 +1,80 @@
+/*
+* tutorial animations
+* 
+*/
+
+#hand {
+    width: 40px;
+    height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    position: absolute;
+    top: calc(50% - 260px);
+    z-index: 5;
+    opacity: 1;
+}
+
+#hand.hidden {
+    opacity: 0;
+    transition: opactiy 1s linear;
+}
+
+.pan {
+    animation-name: pan;
+}
+
+.swipe {
+    animation-name: swipe;
+}
+
+.doubleTap {
+    transition: all 1s ease-in-out;
+}
+
+@media (max-width: 480px) {
+    .doubleTap {
+        top: calc(50% - 170px) !important;
+        left: 70%;
+    }
+}
+
+@media (min-width: 481px) {
+    .doubleTap {
+        top: calc(50% - 100px) !important;
+        left: calc(50% + 100px);
+    }
+}
+
+.pan,
+.swipe {
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.swipe {
+    left: 50%;
+    transition: all 1s ease-in-out; 
+}
+
+#hand {
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes swipe {
+    from {
+        transform: translateX(-40px);
+    }
+    to {
+        transform: translateX(40px);
+    }
+}
+
+@keyframes pan {
+    from {
+        transform: rotate(0deg) translateX(20px) rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg) translateX(20px) rotate(-360deg);
+    }
+}

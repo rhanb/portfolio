@@ -4,9 +4,11 @@ export const translations = {
         angular: 'Depuis 2014 🤟',
         typescript: 'Depuis Angular 2.x',
         catchPhrase: {
-            0: 'Catch phrase 0',
-            2: 'Catch phrase 2',
-            1: 'Catch phrase 1'
+            0: `Le mieux est l'ennemi du bien`,
+            2: 'Gucci gang, Gucci gang, Gucci gang.. Hein?!',
+            1: `S'amuser avec la carte, tu feras ✌️`,
+            3: `J'essaie de trouver un poste aux USA, n'hésitez pas à m'envoyer un mail`,
+            4: `Je vise à toujours apprendre de nouvelles choses`
         },
         surfing: 'du surf 🤙',
         teaching: 'apprendre aux autres',
@@ -29,16 +31,22 @@ export const translations = {
         havingABeer: `partager une bonne bière (ou plusieurs) entre amis 🍻`,
         thinking: `réfléchir et trouver des solutions 🤔`,
         wineAndCheese: `Je suis français ne l'oublions pas.. 🧀🍷🍇`,
-        cinema: `J'ai toujours été un cinéphile`
+        cinema: `J'ai toujours été un cinéphile`,
+        css: 'Copie colle sur CodePen',
+        tutorialSwipe: 'Swippez!',
+        tutorialPan: 'Pivotez!',
+        tutorialDoubleTap: 'Double clickez!'
     },
     'en': {
         nativescript: 'Developer Expert 😎',
         angular: 'Since 2014 🤟',
         typescript: 'Since Angular 2.x',
         catchPhrase: {
-            0: 'Catch phrase 0',
-            2: 'Catch phrase 2',
-            1: 'Catch phrase 1'
+            0: `The best it the enemy of the good`,
+            2: 'Gucci gang, Gucci gang, Gucci gang.. Wait, WTF?!',
+            1: `Having fun with the card, you will ✌️`,
+            3: `I'm trying to find a job in the USA, feel free to send me an email`,
+            4: `I aim to always learn new things`
         },
         surfing: 'surfing 🤙',
         teaching: 'teaching',
@@ -61,7 +69,11 @@ export const translations = {
         havingABeer: `share a good beer (or multiple) with friends 🍻`,
         thinking: `thinkins and finding solutions 🤔`,
         wineAndCheese: `Let's not forget I'm french 🧀🍷🍇`,
-        cinema: `I've always been a cinema lover`
+        cinema: `I've always been a cinema lover`,
+        css: 'Copying and pasting from CodePen',
+        tutorialSwipe: 'Swipe!',
+        tutorialPan: 'Pan it around!',
+        tutorialDoubleTap: 'Double click/tap!'
     }
 }
 

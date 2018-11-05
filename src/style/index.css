@@ -7,6 +7,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Karla', sans-serif;
+    font-weight: 100;
+}
+
+:focus {
+    outline: none;
 }
 
 i {
@@ -20,6 +26,7 @@ input:focus {
 html,
 body,
 #gradient-canvas-body {
+    overflow: hidden;
     width: 100vw;
     height: 100vh;
     max-width: 100vw;
@@ -114,59 +121,9 @@ a:active {
     transform: rotateY(180deg);
 }
 
-#language-picker-container {
-    display: flex;
-    background-color: #FFF;
-    padding: 0;
-    vertical-align: top;
-    position: absolute;
-    left: 2rem;
-}
-
-#language-picker-container>span {
-    margin-top: 5px;
-}
-
-#language-picker-container>span,
-#language-picker-container>span>img {
-    width: 10px;
-    height: 10px;
-}
-
-#language-picker {
-    display: inline-block;
-    overflow: hidden;
-    transition: height .3s ease;
-    height: 20px;
-    transition: all .3s ease;
-}
-
-#language-picker>i {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    height: 4px;
-    width: 4px;
-}
-
-#language-picker.hover {
-    height: 60px;
-}
-
-#language-picker>li {
-    display: block;
-    border-top: 1px solid #EEE;
-}
-
-#language-picker>li:first-child {
-    border: none;
-}
-
 .text {
     display: flex;
     align-items: center;
-    font-family: 'Karla', sans-serif;
     text-align: center;
 }
 
@@ -174,11 +131,21 @@ a:active {
     font-style: italic;
 }
 
+.bold,
+.bold>* {
+    font-weight: 400;
+}
+
 .text>* {
     padding: 0 0 4px 4px;
     font-size: inherit;
     vertical-align: middle;
     line-height: 1;
+}
+
+#catchPhrase {
+    line-height: 1.5;
+    max-width: 80%;
 }
 
 .icon-rounded {

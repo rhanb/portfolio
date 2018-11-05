@@ -5,7 +5,10 @@
     <meta charset="utf-8">
     <title>rhanb</title>
     <link rel="stylesheet" href="./style/index.css">
+    <link rel="stylesheet" href="./translator/language-picker.css">
+    <link rel="stylesheet" href="./tutorial/tutorial.css">
     <link rel="stylesheet" href="./style/tippy.css">
+    <link rel="stylesheet" href="./style/light.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -21,6 +24,7 @@
 <body class="colorised">
 
     <canvas id="gradient-canvas-body"></canvas>
+    <img id="hand" src="./assets/icons/hand.svg" class="hidden" alt="You can swipe or move around the card!" />
     <div id="scene">
         <div id="card">
             <div class="card-face shown" id="card-front">
@@ -42,8 +46,8 @@
                 <div class="card-row text">
                     <h3>Jean-Baptiste Aniel</h3>
                 </div>
-                <div class="card-row text italic">
-                    <p id="catchPhrase">A catch phrase here</p>
+                <div class="card-row text italic bold">
+                    <p id="catchPhrase">A catch phrase should be here</p>
                 </div>
                 <div class="card-row">
                     <a href="https://github.com/rhanb" target="_blank" rel="noreferrer">
@@ -102,19 +106,22 @@
                             <span id="piano" class="col tippy">🎹</span>
                             <span id="videoGames" class="col tippy">🎮</span>
                             <span id="github" class="icon col tippy">
-                                    <img src="./assets/icons/github-octocat.png" alt="Github" />
+                                <img src="./assets/icons/github-octocat.png" alt="Github" />
                             </span>
                             <span id="git" class="icon col tippy">
-                                    <img src="./assets/icons/git.png" alt="Git" />
+                                <img src="./assets/icons/git.png" alt="Git" />
                             </span>
                             <span id="javascript" class="icon col tippy">
-                                    <img src="./assets/icons/javascript.png" alt="JavaScript" />
+                                <img src="./assets/icons/javascript.png" alt="JavaScript" />
                             </span>
                             <span id="sneakersAddict" class="col tippy">👟</span>
                             <span id="thinking" class="col tippy">💡</span>
                             <span id="havingABeer" class="col tippy">🍻</span>
                             <span id="wineAndCheese" class="col tippy">🍷</span>
                             <span id="cinema" class="col tippy">🎥</span>
+                            <span id="css" class="icon col tippy">
+                                <img src="./assets/icons/css.png" alt="CSS" />
+                            </span>
                         </div>
                     </div>
                 </div>

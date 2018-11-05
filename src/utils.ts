@@ -17,14 +17,14 @@ export function preventSelection(event: TouchEvent | MouseEvent | PointerEvent):
     return event;
 };
 
-export function getRandomElementFromArray(array) {
+export function getRandomElementFromArray(array: any[]): any {
     if (!array || array.length <= 0) {
         throw new Error('Array parameter must be defined and must have at least one element');
     }
     return array[this.getRandomIntFromRange(0, array.length - 1)];
 };
 
-export function getRandomIntFromRange(min, max) {
+export function getRandomIntFromRange(min: number, max: number): number {
     if (min >= max) {
         throw new Error('The maximum value from the range must be greater than the minimum value');
     }
