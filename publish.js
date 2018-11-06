@@ -81,6 +81,5 @@ function getVersion(versionType, latestTag) {
 
         nextVersion = ['v', nextVersion.toString().split('').join('.')].join('')
     }
-    console.log(nextVersion);
     return nextVersion;
 }
