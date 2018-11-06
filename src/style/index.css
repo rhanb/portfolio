@@ -2,6 +2,7 @@
     font-family: 'Karla';
     src: url('../assets/fonts/karla/Karla-Bold.ttf') format('ttf');
 }
+
 /**
 * user-agent overrides
 */
@@ -139,7 +140,7 @@ a:-webkit-any-link {
 
 #scene {
     perspective: 600px;
-    animation: bounce 1s;
+    animation: bounceIn 1s;
     transform-style: preserve-3d;
     transition-duration: 0.25s;
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -157,6 +158,7 @@ a:-webkit-any-link {
 * Issue: Can't use CSS proprty backface-visibility, all text is displayed once the rotation's animation is done
 * Solution: hide non active card's face using the CSS class hidden
 */
+
 .card-face {
     display: flex;
     flex-direction: column;
@@ -221,26 +223,48 @@ a:-webkit-any-link {
     }
 }
 
-@keyframes bounce {
+@keyframes bounceIn {
+    from,
+    20%,
+    40%,
+    60%,
+    80%,
+    to {
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+  
     0% {
-        transform: scale(0);
-        opacity: 0
+      opacity: 0;
+      transform: scale3d(0.3, 0.3, 0.3);
     }
-    50% {
-        transform: scale(1.0);
-        opacity: 1.0;
+  
+    20% {
+      transform: scale3d(1.1, 1.1, 1.1);
     }
-    75% {
-        transform: scale(1.1);
+  
+    40% {
+      transform: scale3d(0.9, 0.9, 0.9);
     }
-    100% {
-        transform: scale(1.0);
+  
+    60% {
+      opacity: 1;
+      transform: scale3d(1.03, 1.03, 1.03);
     }
-}
+  
+    80% {
+      transform: scale3d(0.97, 0.97, 0.97);
+    }
+  
+    to {
+      opacity: 1;
+      transform: scale3d(1, 1, 1);
+    }
+  }
 
 /*
 * Search box
-*/ 
+*/
+
 .col {
     width: 30%;
     display: flex;
@@ -262,7 +286,6 @@ a:-webkit-any-link {
     border-top: 1px solid #d9d9d9;
     border-bottom: 1px solid #d9d9d9;
 }
-
 
 .search-input-container {
     margin-top: 6px;
@@ -298,4 +321,3 @@ a:-webkit-any-link {
     font-size: 20px;
     max-height: 20px;
 }
-
