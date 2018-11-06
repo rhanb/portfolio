@@ -10,14 +10,14 @@ export interface Steps {
     [key: string]: Step
 }
 
-export const steps: Steps = {
-    'swipe': {
-        animationClass: 'swipe',
-        contentKey: 'tutorialSwipe'
-    },
+export const steps: Steps = {    
     'pan': {
         animationClass: 'pan',
         contentKey: 'tutorialPan'
+    },
+    'swipe': {
+        animationClass: 'swipe',
+        contentKey: 'tutorialSwipe'
     },
     'doubleTap': {
         animationClass: 'doubleTap',

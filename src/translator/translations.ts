@@ -7,7 +7,7 @@ export const translations = {
             0: `Le mieux est l'ennemi du bien`,
             2: 'Gucci gang, Gucci gang, Gucci gang.. Hein?!',
             1: `S'amuser avec la carte, tu feras ✌️`,
-            3: `J'essaie de trouver un poste aux USA, n'hésitez pas à m'envoyer un mail`,
+            3: `J'essaie de trouver un poste aux USA, n'hésitez pas à m'envoyer un email`,
             4: `Je vise à toujours apprendre de nouvelles choses`
         },
         surfing: 'du surf 🤙',
@@ -35,7 +35,8 @@ export const translations = {
         css: 'Copie colle sur CodePen',
         tutorialSwipe: 'Swippez!',
         tutorialPan: 'Pivotez!',
-        tutorialDoubleTap: 'Double clickez!'
+        tutorialDoubleTap: 'Double clickez!',
+        inputHelp: 'Cliquez sur une icone pour en savoir plus!'
     },
     'en': {
         nativescript: 'Developer Expert 😎',
@@ -73,7 +74,8 @@ export const translations = {
         css: 'Copying and pasting from CodePen',
         tutorialSwipe: 'Swipe!',
         tutorialPan: 'Pan it around!',
-        tutorialDoubleTap: 'Double click/tap!'
+        tutorialDoubleTap: 'Double click/tap!',
+        inputHelp: 'Tap an icon to know more!'
     }
 }
 

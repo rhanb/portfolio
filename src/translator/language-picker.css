@@ -8,7 +8,7 @@
 }
 
 #language-picker-container>span {
-    margin-top: 5px;
+    margin-top: 3px;
 }
 
 #language-picker-container>span,
@@ -23,6 +23,8 @@
     transition: height .3s ease;
     height: 20px;
     transition: all .3s ease;
+    font-size: 15px;
+    padding-right: 3px;
 }
 
 #language-picker.hover {
@@ -32,12 +34,11 @@
 #language-picker>li {
     display: block;
     border-top: 1px solid #EEE;
-    height: 18px;
+    height: 20px;
     width: auto;
 }
 
-
 #language-picker>li:first-child {
-    padding-right: 2px;
+    margin-bottom: 4px;
     border: none;
 }

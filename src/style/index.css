@@ -2,6 +2,9 @@
     font-family: 'Karla';
     src: url('../assets/fonts/karla/Karla-Bold.ttf') format('ttf');
 }
+/**
+* user-agent overrides
+*/
 
 * {
     margin: 0;
@@ -33,6 +36,15 @@ body,
     max-height: 100vh;
 }
 
+html,
+body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    touch-action: none;
+}
+
 #gradient-canvas-me {
     height: 100%;
     width: 100%;
@@ -44,15 +56,6 @@ body,
     z-index: -1;
 }
 
-html,
-body {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    touch-action: none;
-}
-
 a,
 a:visited,
 a:hover,
@@ -60,66 +63,13 @@ a:active {
     color: inherit;
 }
 
-#card {
-    position: relative;
-    transition: transform 1s;
-    transform-style: preserve-3d;
-    width: 100%;
-    height: 100%;
+a:-webkit-any-link {
+    text-decoration: none;
 }
 
-.card-face {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    position: relative;
-    border-radius: 4px;
-    background-color: white;
-    /* backface-visibility: hidden; */
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-/*
-* Issue: Can't use CSS proprty backface-visibility, all text is displayed once the rotation's animation is done
-* Solution: hide non active card's face using the CSS class hidden
+/**
+* text
 */
-
-.hidden {
-    visibility: hidden;
-    transition: visibility 0ms linear 250ms;
-}
-
-.shown {
-    visibility: visible;
-    transition: visibility 0ms linear 250ms;
-}
-
-#card-back {
-    transform: rotateY( 180deg);
-}
-
-#card-back>.card-row {
-    flex-grow: 1;
-}
-
-#card-back>#search-row {
-    flex-grow: 2;
-}
-
-#scene {
-    perspective: 600px;
-    animation: bounce 1s;
-    transform-style: preserve-3d;
-    transition-duration: 0.25s;
-    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-#card.is-flipped {
-    transform: rotateY(180deg);
-}
 
 .text {
     display: flex;
@@ -148,6 +98,10 @@ a:active {
     max-width: 80%;
 }
 
+/**
+* icons
+*/
+
 .icon-rounded {
     border-radius: 50%;
     width: 30px;
@@ -155,12 +109,102 @@ a:active {
 }
 
 .icon>img {
-    width: 19px;
-    height: 19px;
+    width: 20px;
+    height: 20px;
+}
+
+#me {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+}
+
+#me>img {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+#social-medias img {
+    width: 25px;
+    height: 25px;
+}
+
+/**
+* card
+*/
+
+#scene {
+    perspective: 600px;
+    animation: bounce 1s;
+    transform-style: preserve-3d;
+    transition-duration: 0.25s;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 #card {
+    position: relative;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    width: 100%;
+    height: 100%;
+}
+
+/*
+* Issue: Can't use CSS proprty backface-visibility, all text is displayed once the rotation's animation is done
+* Solution: hide non active card's face using the CSS class hidden
+*/
+.card-face {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    border-radius: 4px;
+    background-color: white;
+    /* backface-visibility: hidden; */
+    position: absolute;
+    width: 100%;
+    height: 100%;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.hidden {
+    visibility: hidden;
+    transition: visibility 0ms linear 250ms;
+}
+
+.shown {
+    visibility: visible;
+    transition: visibility 0ms linear 250ms;
+}
+
+#card-back {
+    transform: rotateY( 180deg);
+}
+
+.card-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#card-back>.card-row {
+    flex-grow: 1;
+}
+
+#card-back>#search-row {
+    flex-grow: 2;
+}
+
+#card.is-flipped {
+    transform: rotateY(180deg);
 }
 
 @media (max-width: 480px) {
@@ -173,7 +217,7 @@ a:active {
 @media (min-width: 481px) {
     #scene {
         width: 400px;
-        height: 250px;
+        height: 300px;
     }
 }
 
@@ -194,30 +238,9 @@ a:active {
     }
 }
 
-#me {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    overflow: hidden;
-    position: relative;
-    z-index: 0;
-}
-
-#me>img {
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
-.card-row {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
+/*
+* Search box
+*/ 
 .col {
     width: 30%;
     display: flex;
@@ -240,9 +263,6 @@ a:active {
     border-bottom: 1px solid #d9d9d9;
 }
 
-a:-webkit-any-link {
-    text-decoration: none;
-}
 
 .search-input-container {
     margin-top: 6px;
@@ -267,11 +287,15 @@ a:-webkit-any-link {
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
+    align-items: center;
     height: 100%;
 }
 
 #search-items>* {
     display: flex;
     align-items: start;
-    margin: 10px;
+    margin: 13px;
+    font-size: 20px;
+    max-height: 20px;
 }
+

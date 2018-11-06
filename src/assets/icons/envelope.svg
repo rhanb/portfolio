@@ -1,0 +1,12 @@
+
+<svg width="510px" height="510px" viewBox="0 0 510 510" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="envelope" fill-rule="nonzero">
+            <circle id="Oval" fill="#725AD2" cx="254.643997" cy="254.643997" r="254.593071"></circle>
+            <polygon id="Shape" fill="#FBD303" points="86 139.695184 423.379906 139.695184 423.379906 360.33134 86 360.33134"></polygon>
+            <polygon id="Shape" fill="#F8B517" points="423.379906 359.422121 254.689953 204.425014 86 359.422121"></polygon>
+            <polygon id="Shape" fill="#F5EA0A" points="86 139.695184 254.689953 294.691478 423.379906 139.695184"></polygon>
+        </g>
+    </g>
+</svg>

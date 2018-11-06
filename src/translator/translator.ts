@@ -1,6 +1,6 @@
 import { getRandomIntFromRange } from '../utils';
 import { translations } from './translations';
-import { TippyElement, defaultTippyConfig } from '../common';
+import { TippyElement } from '../common';
 import tippy, { Tippy } from 'tippy.js';
 
 export class Translator {
@@ -23,7 +23,6 @@ export class Translator {
     }
 
     constructor() {
-        tippy.setDefaults(defaultTippyConfig);
         tippy('.tippy');
         this._locale = this.locale;
         this.languageChangeEvent = document.createEvent('CustomEvent');

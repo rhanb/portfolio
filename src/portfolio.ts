@@ -2,16 +2,19 @@
 // third party imports
 import { Manager } from 'hammerjs';
 import Granim = require('granim');
+import tippy from 'tippy.js';
 // local imports
 import { getRandomElementFromArray, getElementCoordinate, calcAngleDegrees, preventSelection, getRandomIntFromRange } from './utils';
 import { Tutorial } from './tutorial/tutorial';
 import { TippyElement } from './common';
 import { Translator } from './translator/translator';
 
+const devilTimeout = 66.6;
+
 export class Portfolio {
 
     private granims: {
-        [key: string]: Granim
+        [key: string]: any
     } = {};
 
     private me: HTMLElement;
@@ -19,7 +22,7 @@ export class Portfolio {
     private card: HTMLElement;
     private faces: NodeListOf<Element>;
 
-    private searchInput: HTMLElement;
+    private searchInput: TippyElement;
     private searchableItems: NodeListOf<HTMLElement>;
 
     private isScrolling = false;
@@ -30,9 +33,9 @@ export class Portfolio {
     private tutorial: Tutorial;
 
     constructor() {
-        this.initElements();
-
         this.translator = new Translator();
+
+        this.initElements();
 
         this.tutorial = new Tutorial(this.translator);
 
@@ -67,8 +70,9 @@ export class Portfolio {
             clearTimeout(timeout);
 
             timeout = setTimeout(() => {
+                // avoid scroll and pan conflicts
                 this.isScrolling = false;
-            }, 66);
+            }, devilTimeout);
 
         }, { passive: true });
 
@@ -101,6 +105,17 @@ export class Portfolio {
         this.card = document.getElementById('card');
         this.me = document.getElementById('gradient-canvas-me');
         this.searchInput = document.getElementById('search-input');
+        tippy(this.searchInput, {
+            sticky: true,
+            content: this.translator.getTranslatedText('inputHelp')
+        });
+
+        document.addEventListener('languageChanged', (event) => {
+            this.searchInput._tippy.setContent(
+                this.translator.getTranslatedText('inputHelp')
+            );
+        });
+
         this.searchableItems = document.querySelectorAll('.tippy');
         this.faces = document.querySelectorAll('.card-face');
     }
@@ -153,8 +168,9 @@ export class Portfolio {
         this.isRotating = true;
         this.scene.style.transform = 'rotateY(' + angleDegX + 'deg) rotateX(' + angleDegY + 'deg)';
         setTimeout(() => {
+            // prevent glitches
             this.isRotating = false;
-        }, 50);
+        }, devilTimeout);
     }
 
     private flipCard(): void {
@@ -170,6 +186,10 @@ export class Portfolio {
 
     }
 
+    private isFlipped(): boolean {
+        return this.card.classList.contains('is-flipped');
+    }
+
     private rotateGradient(granimKey: 'body' | 'me', x: number, y: number) {
         const customDirection = {
             x0: '0px',
@@ -177,7 +197,6 @@ export class Portfolio {
             x1: `${x}px`,
             y1: `${y}px`
         };
-
         this.granims[granimKey].customDirection = customDirection;
         this.granims[granimKey].changeDirection('custom');
     }
