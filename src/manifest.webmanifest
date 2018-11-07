@@ -1,7 +1,8 @@
 {
     "name": "rhanb",
     "short_name": "rhanb",
-    "start_url": "/",
+    "start_url": ".",
+    "description": "Jean-Baptiste Aniel",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",

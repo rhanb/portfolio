@@ -5,9 +5,6 @@ import tippy from 'tippy.js';
 import { defaultTippyConfig } from './common';
 import { Portfolio } from './portfolio';
 
-navigator.serviceWorker && navigator.serviceWorker.register('./sw.ts').then(function (registration) {
-});
-
 tippy.setDefaults(defaultTippyConfig);
 
 const portfolio = new Portfolio();
