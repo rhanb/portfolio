@@ -46,7 +46,9 @@ export class Tutorial {
         this._tutorialState = this.tutorialState;
         this.hand = <TippyElement>(document.getElementById('hand'));
         tippy(this.hand, {
-            sticky: true
+            sticky: true,
+            updateDuration: 0,
+            livePlacement: true
         });
         this.stepIndex = Object.keys(steps).findIndex(key => !this.tutorialState[key].triggered);
         this.setCurrentStep();

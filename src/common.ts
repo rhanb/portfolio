@@ -11,5 +11,6 @@ export const defaultTippyConfig: Props = {
     touch: true,
     inertia: true,
     theme: 'light',
-    size: 'small'
+    size: 'small',
+    performance: true
 };

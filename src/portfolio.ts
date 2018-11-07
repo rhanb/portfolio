@@ -1,7 +1,7 @@
 
 // third party imports
 import { Manager } from 'hammerjs';
-import Granim = require('granim');
+import Granim = require('Granim');
 import tippy from 'tippy.js';
 // local imports
 import { getRandomElementFromArray, getElementCoordinate, calcAngleDegrees, preventSelection, getRandomIntFromRange } from './utils';
@@ -104,10 +104,13 @@ export class Portfolio {
         this.scene = document.getElementById('scene');
         this.card = document.getElementById('card');
         this.me = document.getElementById('gradient-canvas-me');
-        this.searchInput = document.getElementById('search-input');
+        this.searchInput = <TippyElement>document.getElementById('search-input');
         tippy(this.searchInput, {
             sticky: true,
-            content: this.translator.getTranslatedText('inputHelp')
+            content: this.translator.getTranslatedText('inputHelp'),
+            delay: 200,
+            trigger: 'click',
+            updateDuration: 0
         });
 
         document.addEventListener('languageChanged', (event) => {

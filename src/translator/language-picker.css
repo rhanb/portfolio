@@ -5,14 +5,10 @@
     vertical-align: top;
     position: absolute;
     left: 2rem;
+    align-items: center;
 }
 
-#language-picker-container>span {
-    margin-top: 3px;
-}
-
-#language-picker-container>span,
-#language-picker-container>span>img {
+#language-picker-container>img {
     width: 10px;
     height: 10px;
 }
