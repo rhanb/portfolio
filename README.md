@@ -7,7 +7,8 @@
 ### Commands
 
 - Launching server localy: `npm start`
-- Build: `npm build`
+- Application Build: `npm run build`
+- Scripts Build: `npm run build:scripts`
 - Run tests: `npm test`
 - Run tests with coverage outpur: `npm run test:coverage`
 - Publish new version on this repo: `npm run publish:dev` (you will only be able to use this command in a fork)

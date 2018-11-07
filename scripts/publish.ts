@@ -3,11 +3,6 @@ import { dirname } from 'path';
 
 const ora = require('ora');
 
-const prompt = createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
 export function commitAllChanges(dirName: string, callback: () => void, defaultCommitMessage?: string) {
     const git = require('simple-git')(dirName);
     git.status((error, status) => {
@@ -23,7 +18,7 @@ export function commitAllChanges(dirName: string, callback: () => void, defaultC
                     commitAllChangesFromMessage(dirName, commitMessage, () => {
                         callback();
                     });
-                });    
+                });
             }
         }
     });
@@ -59,24 +54,29 @@ export function commitAllChangesAndPush(dirName: string, callback: () => void, d
     }, defaultCommitMessage);
 }
 
-export function pushItAll(dirName: string, callback: () => void) {
+export function pushItAll(dirName: string, callback: () => void, defaultCommitMessage?: string) {
     commitAllChangesAndPush(dirName, () => {
-        pushTags(dirName, getCurrentVersion(), () => {
+        createAndPushTags(dirName, getCurrentVersion(), () => {
             callback();
         });
-    });
+    }, defaultCommitMessage);
 }
 
-export function pushTags(dirName: string, version: string, callback: () => void) {
+export function createAndPushTags(dirName: string, version: string, callback: () => void) {
     const git = require('simple-git')(dirName);
     const spinner = ora('Creating new version tag').start();
     git
-        .tag(['-a', `v${version}`, '-m', `v${version}`], () => {
+        .tag(['-a', `v${version}`, '-m', `v${version}`], (error, stdin) => {
             spinner.text = 'Pushing new version tag';
-        })
-        .pushTags('origin', () => {
-            spinner.stop();
-            callback();
+            /*
+            * always getting the error tag 'x.x.x' already exists even when it doesn't
+            * had to ignore the error
+            * PS: same when pushing tags..
+            */
+            git.pushTags('origin', () => {
+                spinner.stop();
+                callback();
+            });
         });
 }
 
@@ -99,6 +99,11 @@ function hasNoChanges(status) {
 
 
 export function promptAny(question: string, callback: (answer: string) => void) {
+    const prompt = createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+
     prompt.question(question, (anwser: string) => {
         callback(anwser);
         prompt.close();
