@@ -1,4 +1,5 @@
 import { createInterface } from 'readline';
+import { dirname } from 'path';
 
 const ora = require('ora');
 
@@ -7,25 +8,38 @@ const prompt = createInterface({
     output: process.stdout
 });
 
-export function commitAllChanges(dirName: string, callback: () => void) {
+export function commitAllChanges(dirName: string, callback: () => void, defaultCommitMessage?: string) {
     const git = require('simple-git')(dirName);
     git.status((error, status) => {
         if (hasNoChanges(status)) {
             callback();
         } else {
-            promptCommitMessage((commitMessage: string) => {
-                const spinner = ora('Adding unstaged files').start();
-                git
-                    .add('.', () => {
-                        spinner.text = 'Committing files';
-                    })
-                    .commit(commitMessage, () => {
-                        spinner.stop();
+            if (defaultCommitMessage) {
+                commitAllChangesFromMessage(dirName, defaultCommitMessage, () => {
+                    callback();
+                });
+            } else {
+                promptCommitMessage((commitMessage: string) => {
+                    commitAllChangesFromMessage(dirName, commitMessage, () => {
                         callback();
                     });
-            });
+                });    
+            }
         }
     });
+}
+
+export function commitAllChangesFromMessage(dirName: string, commitMessage: string, callback: () => void) {
+    const git = require('simple-git')(dirName);
+    const spinner = ora('Adding unstaged files').start();
+    git
+        .add('.', () => {
+            spinner.text = 'Committing files';
+        })
+        .commit(commitMessage, () => {
+            spinner.stop();
+            callback();
+        });
 }
 
 export function push(dirName: string, callback: () => void) {
@@ -37,12 +51,18 @@ export function push(dirName: string, callback: () => void) {
     });
 }
 
-export function pushItAll(dirName: string, callback: () => void) {
+export function commitAllChangesAndPush(dirName: string, callback: () => void, defaultCommitMessage?: string) {
     commitAllChanges(dirName, () => {
         push(dirName, () => {
-            pushTags(dirName, getCurrentVersion(), () => {
-                callback();
-            });
+            callback();
+        });
+    }, defaultCommitMessage);
+}
+
+export function pushItAll(dirName: string, callback: () => void) {
+    commitAllChangesAndPush(dirName, () => {
+        pushTags(dirName, getCurrentVersion(), () => {
+            callback();
         });
     });
 }
