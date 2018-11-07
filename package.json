@@ -6,7 +6,8 @@
   "scripts": {
     "start": "parcel --https ./src/index.html",
     "build:scripts": "cd ./scripts && tsc",
-    "build": "parcel build ./src/index.html && cp CNAME ./dist/CNAME && npm run build:scripts",
+    "prebuild": "rm -rf dist",
+    "build": " npm run prebuild && parcel build ./src/index.html && cp CNAME ./dist/CNAME && npm run build:scripts",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "publish:dev": "npm test && npm run build:scripts && node ./scripts/publish.dev.js",

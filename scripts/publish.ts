@@ -37,29 +37,29 @@ export function commitAllChangesFromMessage(dirName: string, commitMessage: stri
         });
 }
 
-export function push(dirName: string, callback: () => void) {
+export function push(dirName: string, callback: () => void, optionalOption?: string) {
     const git = require('simple-git')(dirName);
     const spinner = ora('Pushing files').start();
-    git.push('origin', 'master', () => {
+    git.push(['origin', 'master', ...[optionalOption]], () => {
         spinner.stop();
         callback();
     });
 }
 
-export function commitAllChangesAndPush(dirName: string, callback: () => void, defaultCommitMessage?: string) {
+export function commitAllChangesAndPush(dirName: string, callback: () => void, defaultCommitMessage?: string, optionalPushOption?: string) {
     commitAllChanges(dirName, () => {
         push(dirName, () => {
             callback();
-        });
+        }, optionalPushOption);
     }, defaultCommitMessage);
 }
 
-export function pushItAll(dirName: string, callback: () => void, defaultCommitMessage?: string) {
+export function pushItAll(dirName: string, callback: () => void, defaultCommitMessage?: string, optionalPushOption?: string) {
     commitAllChangesAndPush(dirName, () => {
         createAndPushTags(dirName, getCurrentVersion(), () => {
             callback();
         });
-    }, defaultCommitMessage);
+    }, defaultCommitMessage, optionalPushOption);
 }
 
 export function createAndPushTags(dirName: string, version: string, callback: () => void) {
