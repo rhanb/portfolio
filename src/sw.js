@@ -1,40 +1,56 @@
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.6.1/workbox-sw.js');
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js');
 
 if (workbox) {
-    workbox.precaching.precacheAndRoute([]);
 
-    workbox.routing.registerRoute(
-        new RegExp('.*\.js'),
-        workbox.strategies.networkFirst()
+    const { strategies, routing, precaching, expiration } = workbox;
+
+    const expirationPlugin = new expiration.Plugin({
+        // Only cache requests for a week
+        maxAgeSeconds: 7 * 24 * 60 * 60,
+        // Only cache 10 requests.
+        maxEntries: 10,
+    });
+
+    precaching.precacheAndRoute([]);
+
+    routing.registerRoute(
+        // Cache JS files
+        /.*\.js/,
+        // Use cache but update in the background ASAP
+        strategies.staleWhileRevalidate({
+            // Use a custom cache name
+            cacheName: 'js-cache'
+        })
     );
 
-    workbox.routing.registerRoute(
+    routing.registerRoute(
         // Cache CSS files
         /.*\.css/,
-        // Use cache but update in the background ASAP
-        workbox.strategies.staleWhileRevalidate({
-            // Use a custom cache name
+        strategies.staleWhileRevalidate({
             cacheName: 'css-cache',
         })
     );
 
-    workbox.routing.registerRoute(
+    routing.registerRoute(
         // Cache image files
         /.*\.(?:png|jpg|jpeg|svg|gif)/,
-        // Use the cache if it's available
-        workbox.strategies.cacheFirst({
-            // Use a custom cache name
-            cacheName: 'image-cache'
+        // Use cache first, network if it fails
+        strategies.cacheFirst({
+            cacheName: 'image-cache',
+            plugins: [
+                expirationPlugin
+            ]
         })
     );
 
-    workbox.routing.registerRoute(
+    routing.registerRoute(
         // Cache image files
         /.*\.pdf/,
-        // Use the cache if it's available
-        workbox.strategies.cacheFirst({
-            // Use a custom cache name
-            cacheName: 'cv-cache'
+        strategies.cacheFirst({
+            cacheName: 'cv-cache',
+            plugins: [
+                expirationPlugin
+            ]
         })
     );
 }
