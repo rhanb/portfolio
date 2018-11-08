@@ -36,7 +36,9 @@ export const translations = {
         tutorialSwipe: 'Swippez!',
         tutorialPan: 'Pivotez!',
         tutorialDoubleTap: 'Double clickez!',
-        inputHelp: 'Cliquez sur une icone pour en savoir plus!'
+        inputHelp: 'Cliquez sur une icone pour en savoir plus!',
+        theCode: 'Le code 👾',
+        resetTutorial: 'Réinitialiser le tutorial ❌'
     },
     'en': {
         nativescript: 'Developer Expert 😎',
@@ -75,7 +77,9 @@ export const translations = {
         tutorialSwipe: 'Swipe!',
         tutorialPan: 'Pan it around!',
         tutorialDoubleTap: 'Double click/tap!',
-        inputHelp: 'Tap an icon to know more!'
+        inputHelp: 'Tap an icon to know more!',
+        theCode: 'The code 👾',
+        resetTutorial: 'Reset tutorial ❌'
     }
 }
 

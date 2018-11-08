@@ -323,3 +323,25 @@ a:-webkit-any-link {
     font-size: 20px;
     max-height: 20px;
 }
+
+/**
+* footer
+*/
+
+footer {
+    height: 7vh;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    background-color: #FDF4E3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer>a {
+    text-decoration: black;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 13px;
+}

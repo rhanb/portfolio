@@ -26,7 +26,7 @@ export class Tutorial {
     private _tutorialState: Steps;
 
     get tutorialState(): Steps {
-        return this._tutorialState || JSON.parse(localStorage.getItem('tutorialState')) || steps;
+        return this._tutorialState || JSON.parse(localStorage.getItem('tutorialState')) || { ...steps };
     }
 
     set tutorialState(tutorialStateValue: Steps) {
@@ -53,8 +53,12 @@ export class Tutorial {
         this.stepIndex = Object.keys(steps).findIndex(key => !this.tutorialState[key].triggered);
         this.setCurrentStep();
 
-        document.addEventListener('languageChanged', (event) => {
+        document.addEventListener('languageChanged', () => {
             this.playCurrentStep();
+        });
+
+        document.getElementById('resetTutorial').addEventListener('click', () => {
+            this.restart();
         });
 
     }
@@ -94,5 +98,18 @@ export class Tutorial {
             }
             this.next();
         }
+    }
+
+    restart() {
+        this.tutorialState = this.getInitialSteps();
+        this.stepIndex = 0;
+        this.setCurrentStep();
+    }
+
+    private getInitialSteps() {
+        Object.keys(steps).forEach(key => {
+            steps[key].triggered = false;
+        });
+        return steps;
     }
 }
