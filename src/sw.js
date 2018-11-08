@@ -23,8 +23,18 @@ if (workbox) {
         /.*\.(?:png|jpg|jpeg|svg|gif)/,
         // Use the cache if it's available
         workbox.strategies.cacheFirst({
-          // Use a custom cache name
-          cacheName: 'image-cache'
+            // Use a custom cache name
+            cacheName: 'image-cache'
         })
-      );
+    );
+
+    workbox.routing.registerRoute(
+        // Cache image files
+        /.*\.pdf/,
+        // Use the cache if it's available
+        workbox.strategies.cacheFirst({
+            // Use a custom cache name
+            cacheName: 'cv-cache'
+        })
+    );
 }

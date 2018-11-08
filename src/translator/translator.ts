@@ -5,6 +5,7 @@ import tippy, { Tippy } from 'tippy.js';
 
 export class Translator {
     private languagesPicker: HTMLElement;
+    private cv: HTMLLinkElement;
 
     private _locale: string;
     public translationsKeys: string[];
@@ -30,6 +31,7 @@ export class Translator {
             language: this.locale
         });
         this.translationsKeys = Object.keys(translations[this.locale]);
+        this.cv = <HTMLLinkElement>document.getElementById('cv');
         this.initLanguagePicker();
     }
 
@@ -55,7 +57,12 @@ export class Translator {
 
     private onLanguageChange() {
         this.orderLanguages();
+        this.changeCv();
         this.renderTranslatedTexts();
+    }
+
+    private changeCv() {
+        this.cv.href = `./assets/cv/CV_ANIEL.${this.locale}.pdf`;
     }
 
     private orderLanguages(): void {
