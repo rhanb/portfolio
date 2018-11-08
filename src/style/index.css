@@ -211,21 +211,20 @@ a:-webkit-any-link {
     transform: rotateY(180deg);
 }
 
-@media (max-width: 480px),
-(orientation: landscape) {
+@media (max-width: 480px) {
     #scene {
         width: 80vw;
         height: 400px;
     }
 }
 
-@media (orientation: landscape) {
+/* @media only screen and (orientation: landscape) {
     #scene {
         max-height: 80%;
     }
-}
+} */
 
-@media (min-width: 481px) and (orientation: portrait) {
+@media (min-width: 481px) {
     #scene {
         width: 400px;
         height: 300px;
