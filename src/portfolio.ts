@@ -57,28 +57,34 @@ export class Portfolio {
 
         const PanTimeout = new Hammer.Pan({
             event: 'panmove',
-            threshold: 500
+            threshold: 500,
+            direction: Hammer.DIRECTION_ALL
         });
 
         const searchableItemsContainer = document.getElementById('search-items');
         let timeout;
 
-        searchableItemsContainer.addEventListener('scroll', (event) => {
-            event.stopPropagation();
+
+        const scrollHandler = (event) => {
             this.isScrolling = true;
 
             clearTimeout(timeout);
 
             timeout = setTimeout(() => {
-                // avoid scroll and pan conflicts
                 this.isScrolling = false;
             }, devilTimeout);
 
-        }, { passive: true });
+        };
+
+        searchableItemsContainer.addEventListener('scroll', scrollHandler, { passive: true });
 
         documentManager.on('panmove', (moveEvent: TouchMouseInput) => {
-            if (!this.isScrolling && !this.isRotating) {
+            const query = `.${moveEvent.target.className.split(' ').join('.')}`;
+            const isSearchingItems = query === '.' ? false : searchableItemsContainer.querySelectorAll(query).length > 0;
+            if (!(this.isRotating || this.isScrolling || moveEvent.target.id === 'search-items' || isSearchingItems)) {
                 this.onDrag(moveEvent);
+            } else {
+                moveEvent.srcEvent.preventDefault();
             }
         });
 
