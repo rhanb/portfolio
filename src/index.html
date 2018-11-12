@@ -4,6 +4,15 @@
 <head>
     <meta charset="utf-8">
     <title>rhanb</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128980068-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-128980068-1');
+    </script>
     <link rel="stylesheet" href="./style/index.css">
     <link rel="stylesheet" href="./translator/language-picker.css">
     <link rel="stylesheet" href="./tutorial/tutorial.css">
@@ -21,7 +30,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 </head>
 
-<body class="colorised">
+<body>
 
     <canvas id="gradient-canvas-body"></canvas>
     <img id="hand" src="./assets/icons/hand.svg" class="hidden" alt="You can swipe or move around the card!" />

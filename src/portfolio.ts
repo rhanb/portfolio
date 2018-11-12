@@ -84,6 +84,8 @@ export class Portfolio {
 
         documentManager.on('panend pancancel', () => {
             this.tutorial.changeTutorialState('pan', true);
+            this.granims['me'].play();
+            this.granims['body'].play();
             this.rotateCard(0, 0);
         });
 
@@ -194,6 +196,7 @@ export class Portfolio {
     }
 
     private rotateGradient(granimKey: 'body' | 'me', x: number, y: number) {
+        this.granims[granimKey].pause();
         const customDirection = {
             x0: '0px',
             y0: '0px',
